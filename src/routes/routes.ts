@@ -1,5 +1,5 @@
 import express from "express";
-import { AnalysisController } from "../controllers/analyze-controller";
+import { AnalysisController } from "../controllers/analysis-controller";
 import { container } from "tsyringe";
 
 const router = express.Router()

@@ -6,8 +6,8 @@ const app: Application = express()
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
-app.use("/",router)
-app.listen(3000,()=>{
-    console.log("App is listening on port 3000")
+app.use("/api/analysis",router)
+app.listen(3001,()=>{
+    console.log("App is listening on port 3001")
 })
 
