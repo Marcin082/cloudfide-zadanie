@@ -12,9 +12,9 @@ export class AnalysisController{
     constructor(@inject("IAnalysisService") private analysisService: IAnalysisService) {}
     public startAnalyze = async (req:Request, res: Response, next: NextFunction):Promise<void> =>{
         try{
-            const {symbol, dateFrom} = req.body
-            const result = await this.analysisService.analyzeData(symbol, dateFrom)
-            //res.json(result)
+            const {symbol} = req.body
+            const result = await this.analysisService.analyzeData(symbol)
+            res.json(result)
         }catch(e){
             throw new Error(`Failed to run the analysis endpoint, ${e}`)
         }

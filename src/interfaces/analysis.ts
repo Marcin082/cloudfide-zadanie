@@ -1,3 +1,3 @@
 export interface IAnalysisService{
-    analyzeData(symbol:string, dateFrom:string): Promise<string>;
+    analyzeData(symbol:string): Promise<string>;
 }
