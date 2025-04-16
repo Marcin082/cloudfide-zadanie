@@ -10,7 +10,7 @@ const routes_1 = __importDefault(require("./routes/routes"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
-app.use("/", routes_1.default);
-app.listen(3000, () => {
-    console.log("App is listening on port 3000");
+app.use("/api/analysis", routes_1.default);
+app.listen(3001, () => {
+    console.log("App is listening on port 3001");
 });

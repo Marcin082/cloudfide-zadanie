@@ -23,17 +23,24 @@ const axios_1 = __importDefault(require("axios"));
 const tsyringe_1 = require("tsyringe");
 require("reflect-metadata");
 let AnalysisService = class AnalysisService {
-    analyzeData(symbol, dateFrom, dateTo) {
+    analyzeData(symbol, dateFrom) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const res = yield axios_1.default.get('https://api.binance.com/api/v3/trades', {
+                const res = yield axios_1.default.get('https://api.binance.com/api/v3/historicalTrades', {
                     params: {
                         symbol: symbol.toUpperCase(),
+                        limit: 50
+                        //fromId: dateFrom
                     }
                 });
-                console.log(res.data);
+                const firstPrice = res.data[0].price;
+                const lastPrice = res.data[-1].price;
+                const diffrence = lastPrice - firstPrice;
+                const option = diffrence > 0 ? "increases" : "decreases";
+                return `Price of ${symbol} symbol ${option} by ${diffrence}`;
             }
-            catch (_a) {
+            catch (e) {
+                throw new Error(`Error while fetching data form Binance Api, ${e}`);
             }
         });
     }

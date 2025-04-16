@@ -6,19 +6,18 @@ import "reflect-metadata"
 @injectable()
 export class AnalysisService implements IAnalysisService{
 
-    public async analyzeData(symbol:string, dateFrom:string, dateTo:string): Promise<void>{
-        try{
-           
-            const res = await axios.get('https://api.binance.com/api/v3/trades',{
+    public async analyzeData(symbol:string, dateFrom:string): Promise<string>{ 
+            const res = await axios.get('https://api.binance.com/api/v3/historicalTrades',{
                 params:{
                     symbol: symbol.toUpperCase(),
-                    startTime: dateFrom,
-                    endTime: dateTo
+                    limit: 50
+                    //fromId: dateFrom
                 }
             })
-            console.log(res.data)
-        }catch{
-            
-        }
+            const firstPrice = res.data[0].price
+            const lastPrice = res.data[-1].price
+            const diffrence = lastPrice - firstPrice
+            const option = diffrence>0 ? "increases" : "decreases";
+            return `Price of ${symbol} symbol ${option} by ${diffrence}`
     }
 }

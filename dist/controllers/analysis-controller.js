@@ -33,8 +33,9 @@ let AnalysisController = class AnalysisController {
         this.analysisService = analysisService;
         this.startAnalyze = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const { symbol, dateFrom, dateTo } = req.body;
-                yield this.analysisService.analyzeData(symbol, dateFrom, dateTo);
+                const { symbol, dateFrom } = req.body;
+                const result = yield this.analysisService.analyzeData(symbol, dateFrom);
+                //res.json(result)
             }
             catch (_a) {
                 throw new Error("Failed to run the analysis endpoint");
